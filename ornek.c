@@ -1,45 +1,38 @@
-import java.util.Scanner;
+#include <stdio.h>
+#include <math.h>
+#include<stdlib.h>
  
-public class StandartSapma{
-	
-	public static double ortalamaHesapla(int dizi[]){ 
-		 double toplam = 0; 
-		 	for (int i = 0; i < dizi.length; i++){ 
-		 		toplam = toplam + dizi[i]; 					//Formül ile ortalama değerini bulma işlemi 
-		 	} 
-		 		return (double) (toplam / dizi.length); 	//Ortalama  alındı
-		
-	} 
-		 
-	public static double standartSapmaHesapla(int dizi[], double ort) { 
-		 double kareToplam = 0; 
-		 	for (int i = 0; i < dizi.length; i++){ 
-		 		kareToplam = kareToplam + dizi[i] * dizi[i]; 			//Formül ile standart sapma bulme işlemi
-		 	} 
-		 		return (double) Math.sqrt(kareToplam / dizi.length - ort*ort);	//Sapma değeri alındı
-		
-	} 
-		 
-	public static void main(String [] args){ 
-			Scanner iha=new Scanner(System.in);  	
-			
-			int dizi[], boyut;
-		 
-			System.out.print("Kaç Elemanın Standart Sapmasını Bulmak İstersiniz:  ");
-			boyut = iha.nextInt();
-			dizi = new int[boyut];					//Kullanıcıdan istenen değerler 
-			System.out.println("Sayıları giriniz: ");
-				for (int i = 0; i < boyut; i++){
-					System.out.print((i+1)+". Sayıyı giriniz: ");
-					dizi[i] = iha.nextInt();
-				}
-		 
-			System.out.println();
-			System.out.println("Sayıların ortalaması: "+ortalamaHesapla(dizi)); 
-			System.out.println();
-			System.out.println("Sayıların standart sapması: "+standartSapmaHesapla(dizi, ortalamaHesapla(dizi))); 
-	
-			//Ortalam ve Standart sapma degerleri ekrana yazdırıldı
-			
-		}
-	}
+int main(void){
+	//Değişkenler tanımladı.
+   int i,N;
+   float sapmaDizisi[5];		//girilen değerleri dizi içinde tutulması için dizi tanımlandı.
+   float  toplam = 0, aritmetikOrt, standartSapma;			//toplam, ortalama ve standart sapma değerlerinin tutulması için değişkenler tanımlandı
+ 
+   printf("Kac Elemanin Standart Sapmasi Hesaplansin : ");		//Standart sapması alınacak elemanların girilmesi istendi.
+   scanf("%d",&N);
+ 
+   sapmaDizisi[N];		//yukarıda tanımlanan dizi n boyut lu hale getirildi.
+ 
+   for(i=0; i<N; i++){
+      printf("%d. Elemani Giriniz : ",i+1);			//döngü içerisinde elemanlar sırayla girilmesi istendi.
+      scanf("%f",&sapmaDizisi[i]);
+   }
+ 
+   for(i = 0;i<N;i++){
+	   toplam += sapmaDizisi[i];		//ortalama bulmak için girilen degerler toplandı.
+   }
+   aritmetikOrt = toplam/N;		//toplam sonucu girilen sayı adedine bölünerek aritmetik ortalama bulundu.
+ 
+   
+   for(toplam = 0.0, i=0; i<N; i++){
+       toplam += pow((sapmaDizisi[i]-aritmetikOrt),2);		//standart sapma formulunden yola cıkılarak formuldeki adımlar uygulandı ve sapma degerindeki toplam bulundu.
+   }
+ 
+   standartSapma = sqrt(toplam/(N-1));		//sapma degeri bulundu
+ 
+ //  printf("Ortalama       = %fn",aritmetikOrt);		// ve sonuclar ekrana yazdırıldı.
+   printf("Standart sapma = %fn",standartSapma);
+ 
+   system("PAUSE");
+  return 0;
+}
